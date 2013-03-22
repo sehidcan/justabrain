@@ -1543,46 +1543,40 @@ prepare() {
     default_value() {
         case ${1} in
         arch)
-            value="$(uname -m)"
-            
-            case ${value} in
-            x86_64)
-                value="amd64"
-            ;;
-            esac
+            value="amd64"
         ;;
         blimit)
             value="0"
         ;;
         domainname)
-            value="easygentoo"
+            value="gentoo"
         ;;
         grub)
             value="$(echo ${root_part} | sed s:[0-9].*::)"
         ;;
         hostname)
-            value="freshinstall"
+            value="linux"
         ;;
         keymap)
-            value="us"
+            value="br"
         ;;
         username)
-            value="owner"
+            value="justabrain"
         ;;
         userpass)
-            value="resu"
+            value="ilovegentoo"
         ;;
         root)
             echo; er "  /root partition is not specified in profile. Please change your profile and start again."; echo; exit 1
         ;;
         rootpass)
-            value="toor"
+            value="letmein"
         ;;
         setup)
-            value="basic"
+            value="normal"
         ;;
         type)
-            value="pc"
+            value="laptop"
         ;;
         windows)
             value=""
