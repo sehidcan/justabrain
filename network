@@ -5,28 +5,37 @@ clear; sleep 0.5s
 echo
 echo "Please use this script as root"; sleep 2s
 echo
-echo "Downloading kernel config for DELL XPS 15..."
+echo "-----------------------"
+echo
+echo "Downloading kernel config for DELL XPS 15..."; sleep 3s
 echo
 wget https://raw.github.com/shdcn/justabrain/master/dell.xps.15.config
 mv dell.xps.15.config /etc/kernels
-echo "Using genkernel to create a new kernel..."
+echo
+echo "-----------------------"
+echo
+echo "Using genkernel to create a new kernel..."; sleep 3s
 echo
 genkernel --bootdir=/boot --bootloader=grub --disklabel --install --kernel-config=/etc/kernels/dell.xps.15.config --kernname=xps15 --makeopts=-j8 --no-mountboot --postclear --save-config all
 echo
-echo "Emerging necessary driver firmware for your wireless network adapter..."
-echo "You will see the emerge message two times, it's ok."
+echo "-----------------------"
+echo
+echo "Emerging necessary driver firmware for your wireless network adapter..."; sleep 2s
+echo "You will see the emerge message two times, it's ok."; sleep 2s
 echo
 emerge sys-firmware/iwl6030-ucode
 echo -5 | etc-update
 emerge sys-firmware/iwl6030-ucode
 echo
-echo "All done :)"
+echo "-----------------------"
+echo
+echo "All done :)"; sleep 2s
 echo
 echo "PLEASE READ ALL MESSAGES BELOW"; sleep 2s
 echo
 echo "You need to reboot your computer now."; sleep 1s
 echo "If you can't connect to internet after reboot, use these commands:"; sleep 2s
-echo "(You won't need these commands if everything is working fine)"
+echo "(You won't need these commands if everything is working fine)"; sleep 1s
 echo
 echo "modprobe iwlwifi"; sleep 1s
 echo "modprobe r8169"; sleep 1s
@@ -37,6 +46,6 @@ echo "second one is ethernet driver module."; sleep 1s
 echo
 echo "Last command activates your wireless card."; sleep 1s
 echo
-echo "Hope it all works :) Have fun."
+echo "Hope it all works :) Have fun."; sleep 1s
 echo
 exit 0
