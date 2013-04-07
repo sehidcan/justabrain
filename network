@@ -15,20 +15,20 @@ echo; er "Please use this script as root"; sleep 2s
 
 echo; eb "-----------------------"; echo
 
-eb2 "  *"; eg "Downloading kernel config for DELL XPS 15..."; sleep 3s; echo
+eb2 "  *"; eg " Downloading kernel config for DELL XPS 15..."; sleep 3s; echo
 
 wget https://raw.github.com/shdcn/justabrain/master/dell.xps.15.config
 mv dell.xps.15.config /etc/kernels
 
 echo; eb "-----------------------"; echo
 
-eb2 "  *"; eg "Using genkernel to create a new kernel..."; sleep 3s; echo
+eb2 "  *"; eg " Using genkernel to create a new kernel..."; sleep 3s; echo
 
 genkernel --bootdir=/boot --bootloader=grub --disklabel --install --kernel-config=/etc/kernels/dell.xps.15.config --kernname=xps15 --makeopts=-j8 --no-mountboot --postclear --save-config all
 
 echo; eb "-----------------------"; echo
 
-eb2 "  *"; eg "Emerging necessary driver firmware for your wireless network adapter..."; sleep 2s
+eb2 "  *"; eg " Emerging necessary driver firmware for your wireless network adapter..."; sleep 2s
 ey "   You will see the emerge message two times, it's ok."; sleep 2s; echo
 
 emerge sys-firmware/iwl6030-ucode
