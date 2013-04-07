@@ -586,7 +586,7 @@ k_kernel() {
     
     get_files "https://raw.github.com/shdcn/justabrain/master/dell.xps.15.config"
     
-    mv dell.xps.15z.config easygentoo.config
+    mv dell.xps.15.config easygentoo.config
     
     [[ ! -d "/etc/kernels" ]] && mkdir -p /etc/kernels
 

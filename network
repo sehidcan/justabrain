@@ -8,10 +8,10 @@ echo
 echo "Downloading kernel config for DELL XPS 15..."
 echo
 wget https://raw.github.com/shdcn/justabrain/master/dell.xps.15.config
-mv xps.15.config /etc/kernels
+mv dell.xps.15.config /etc/kernels
 echo "Using genkernel to create a new kernel..."
 echo
-genkernel --bootdir=/boot --bootloader=grub --disklabel --install --kernel-config=/etc/kernels/xps.15.config --kernname=xps15 --makeopts=-j8 --no-mountboot --postclear --save-config all
+genkernel --bootdir=/boot --bootloader=grub --disklabel --install --kernel-config=/etc/kernels/dell.xps.15.config --kernname=xps15 --makeopts=-j8 --no-mountboot --postclear --save-config all
 echo
 echo "Emerging necessary driver firmware for your wireless network adapter..."
 echo "You will see the emerge message two times, it's ok."
