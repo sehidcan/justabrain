@@ -1,51 +1,59 @@
 #!/bin/bash
 # Dell XPS 15 network configuration script
+normal=$'\e[0m'; red=$'\e[31;01m'; green=$'\e[32;01m'; yellow=$'\e[33;01m'; blue=$'\e[34;01m'; pink=$'\e[35;01m'; cyan=$'\e[36;01m'; white=$'\e[37;01m'
 
-clear; sleep 0.5s
-echo
-echo "Please use this script as root"; sleep 2s
-echo
-echo "-----------------------"
-echo
-echo "Downloading kernel config for DELL XPS 15..."; sleep 3s
-echo
+en() { echo "${normal}${*}${normal}";} ; er() { echo "${red}${*}${normal}";} ; eg() { echo "${green}${*}${normal}";} ; ey() { echo "${yellow}${*}${normal}";}
+eb() { echo "${blue}${*}${normal}";} ; ep() { echo "${pink}${*}${normal}";} ; ec() { echo "${cyan}${*}${normal}";} ; ew() { echo "${white}${*}${normal}";}
+
+en2() { echo -n "${normal}${*}${normal}";} ; er2() { echo -n "${red}${*}${normal}";} ; eg2() { echo -n "${green}${*}${normal}";} ; ey2() { echo -n "${yellow}${*}${normal}";}
+eb2() { echo -n "${blue}${*}${normal}";} ; ep2() { echo -n "${pink}${*}${normal}";} ; ec2() { echo -n "${cyan}${*}${normal}";} ; ew2() { echo -n "${white}${*}${normal}";}
+
+cl() { clear; sleep 0.5s; echo;}
+
+cl
+echo; er "Please use this script as root"; sleep 2s
+
+echo; eb "-----------------------"; echo
+
+eb2 "  *"; eg "Downloading kernel config for DELL XPS 15..."; sleep 3s; echo
+
 wget https://raw.github.com/shdcn/justabrain/master/dell.xps.15.config
 mv dell.xps.15.config /etc/kernels
-echo
-echo "-----------------------"
-echo
-echo "Using genkernel to create a new kernel..."; sleep 3s
-echo
+
+echo; eb "-----------------------"; echo
+
+eb2 "  *"; eg "Using genkernel to create a new kernel..."; sleep 3s; echo
+
 genkernel --bootdir=/boot --bootloader=grub --disklabel --install --kernel-config=/etc/kernels/dell.xps.15.config --kernname=xps15 --makeopts=-j8 --no-mountboot --postclear --save-config all
-echo
-echo "-----------------------"
-echo
-echo "Emerging necessary driver firmware for your wireless network adapter..."; sleep 2s
-echo "You will see the emerge message two times, it's ok."; sleep 2s
-echo
+
+echo; eb "-----------------------"; echo
+
+eb2 "  *"; eg "Emerging necessary driver firmware for your wireless network adapter..."; sleep 2s
+ey "   You will see the emerge message two times, it's ok."; sleep 2s; echo
+
 emerge sys-firmware/iwl6030-ucode
 echo -5 | etc-update
 emerge sys-firmware/iwl6030-ucode
+
+echo; eb "-----------------------"; echo
+
+eg "All done :)"; sleep 2s
 echo
-echo "-----------------------"
+er "PLEASE READ ALL MESSAGES BELOW"; sleep 2s
 echo
-echo "All done :)"; sleep 2s
+ew "You need to reboot your computer now."; sleep 1s
+ew "If you can't connect to internet after reboot, use these commands:"; sleep 2s
+ew "(You won't need these commands if everything is working fine)"; sleep 1s
 echo
-echo "PLEASE READ ALL MESSAGES BELOW"; sleep 2s
+eg "modprobe iwlwifi"; sleep 1s
+eg "modprobe r8169"; sleep 1s
+eg "ifconfig wlan0 up"; sleep 1s
 echo
-echo "You need to reboot your computer now."; sleep 1s
-echo "If you can't connect to internet after reboot, use these commands:"; sleep 2s
-echo "(You won't need these commands if everything is working fine)"; sleep 1s
+ew "First command loads your wireless driver module,"; sleep 2s
+ew "second one is ethernet driver module."; sleep 1s
 echo
-echo "modprobe iwlwifi"; sleep 1s
-echo "modprobe r8169"; sleep 1s
-echo "ifconfig wlan0 up"; sleep 1s
+ew "Last command activates your wireless card."; sleep 1s
 echo
-echo "First command loads your wireless driver module,"; sleep 2s
-echo "second one is ethernet driver module."; sleep 1s
-echo
-echo "Last command activates your wireless card."; sleep 1s
-echo
-echo "Hope it all works :) Have fun."; sleep 1s
+ew "Hope it all works :) Have fun."; sleep 1s
 echo
 exit 0
