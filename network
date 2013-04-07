@@ -1,0 +1,42 @@
+#!/bin/bash
+# Dell XPS 15 network configuration script
+
+clear; sleep 0.5s
+echo
+echo "Please use this script as root"; sleep 2s
+echo
+echo "Downloading kernel config for DELL XPS 15..."
+echo
+wget https://raw.github.com/shdcn/justabrain/master/dell.xps.15.config
+mv xps.15.config /etc/kernels
+echo "Using genkernel to create a new kernel..."
+echo
+genkernel --bootdir=/boot --bootloader=grub --disklabel --install --kernel-config=/etc/kernels/xps.15.config --kernname=xps15 --makeopts=-j8 --no-mountboot --postclear --save-config all
+echo
+echo "Emerging necessary driver firmware for your wireless network adapter..."
+echo "You will see the emerge message two times, it's ok."
+echo
+emerge sys-firmware/iwl6030-ucode
+echo -5 | etc-update
+emerge sys-firmware/iwl6030-ucode
+echo
+echo "All done :)"
+echo
+echo "PLEASE READ ALL MESSAGES BELOW"; sleep 2s
+echo
+echo "You need to reboot your computer now."; sleep 1s
+echo "If you can't connect to internet after reboot, use these commands:"; sleep 2s
+echo "(You won't need these commands if everything is working fine)"
+echo
+echo "modprobe iwlwifi"; sleep 1s
+echo "modprobe r8169"; sleep 1s
+echo "ifconfig wlan0 up"; sleep 1s
+echo
+echo "First command loads your wireless driver module,"; sleep 2s
+echo "second one is ethernet driver module."; sleep 1s
+echo
+echo "Last command activates your wireless card."; sleep 1s
+echo
+echo "Hope it all works :) Have fun."
+echo
+exit 0

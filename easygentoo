@@ -584,7 +584,7 @@ k_kernel() {
     
     echo; eg2 "  Creating kernel config"; eg "..."; echo; sleep 0.5s
     
-    get_files "https://raw.github.com/shdcn/justabrain/master/dell.xps.15z.config"
+    get_files "https://raw.github.com/shdcn/justabrain/master/dell.xps.15.config"
     
     mv dell.xps.15z.config easygentoo.config
     
@@ -691,6 +691,10 @@ k_nm() {
     
     fl "/usr/share/polkit-1/actions/org.freedesktop.NetworkManager.policy" "b" "0"
     sed -i s/"<allow_active>.*<\/allow_active>"/"<allow_active>yes<\/allow_active>"/ ${trg_file}
+    
+    inst "sys-firmware/iwl6030-ucode"
+    refresh
+    inst "sys-firmware/iwl6030-ucode"
 }
 
 k_alsa() {
