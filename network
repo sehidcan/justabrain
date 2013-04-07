@@ -29,7 +29,7 @@ genkernel --bootdir=/boot --bootloader=grub --disklabel --install --kernel-confi
 echo; eb "-----------------------"; echo
 
 eb2 "  *"; eg " Emerging necessary driver firmware for your wireless network adapter..."; sleep 2s
-ey "   You will see the emerge message two times, it's ok."; sleep 2s; echo
+ey "    You will see the emerge message two times, it's ok."; sleep 2s; echo
 
 emerge sys-firmware/iwl6030-ucode
 echo -5 | etc-update
@@ -37,23 +37,23 @@ emerge sys-firmware/iwl6030-ucode
 
 echo; eb "-----------------------"; echo
 
-eg "All done :)"; sleep 2s
+eg "  All done :)"; sleep 2s
 echo
-er "PLEASE READ ALL MESSAGES BELOW"; sleep 2s
+er "  PLEASE READ ALL MESSAGES BELOW"; sleep 2s
 echo
-ew "You need to reboot your computer now."; sleep 1s
-ew "If you can't connect to internet after reboot, use these commands:"; sleep 2s
-ew "(You won't need these commands if everything is working fine)"; sleep 1s
+ew "  You need to reboot your computer now."; sleep 1s
+ew "  If you can't connect to internet after reboot, use these commands:"; sleep 2s
+ew "  (You won't need these commands if everything is working fine)"; sleep 1s
 echo
-eg "modprobe iwlwifi"; sleep 1s
-eg "modprobe r8169"; sleep 1s
-eg "ifconfig wlan0 up"; sleep 1s
+eg "      modprobe iwlwifi"; sleep 1s
+eg "      modprobe r8169"; sleep 1s
+eg "      ifconfig wlan0 up"; sleep 1s
 echo
-ew "First command loads your wireless driver module,"; sleep 2s
-ew "second one is ethernet driver module."; sleep 1s
+ew "  First command loads your wireless driver module,"; sleep 2s
+ew "  second one is ethernet driver module."; sleep 1s
 echo
-ew "Last command activates your wireless card."; sleep 1s
+ew "  Last command activates your wireless card."; sleep 1s
 echo
-ew "Hope it all works :) Have fun."; sleep 1s
+ew "  Hope it all works :) Have fun."; sleep 1s
 echo
 exit 0
