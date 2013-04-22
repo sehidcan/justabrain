@@ -195,7 +195,7 @@ mirror_check() {
     for mrr in ${mirrorlist}
     do
         # Trimming mirror name. Ex. http://gentoo.kiev.ua/ftp -->> gentoo.kiev.ua
-        [[ "$(ping -nc3 -i2 $(echo ${mrr} | sed -e 's/.*\:\/\///' -e 's/\/.*$//'))" ]] && { a2v "mirror=\"${mrr}\""; break; }
+        [[ "$(ping -nc3 -i2 $(echo ${mrr} | sed -e 's/.*\:\/\///' -e 's/\/.*$//'))" ]] && { sed -i s:"^mirror=.*":"mirror=\"${mrr}\"": ${vl}; break; }
     done
     
     # Cancel setup when there are no available mirrors
@@ -1834,21 +1834,6 @@ get_tar() {
         t_int="${mirror}/releases/amd64/autobuilds/${tardate}/default/${tardate}/${tarball}"; t_dig="${t_int}.DIGESTS"
     ;;
     esac
-    
-    # Temporary fix for tarball download issue
-    
-    # case ${arch} in
-    # i686)
-        # tarball="stage3-i686-20130108.tar.bz2"
-        # t_int="${mirror}/releases/x86/autobuilds/20130108/default/20130108/${tarball}"
-    # ;;
-    # amd64)
-        # tarball="stage3-amd64-20130110.tar.bz2"
-        # t_int="${mirror}/releases/amd64/autobuilds/20130110/${tarball}"
-    # ;;
-    # esac
-    
-    # a2v "tarball=\"${tarball}\""
     
     t_dig="${t_int}.DIGESTS"
     
