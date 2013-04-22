@@ -1419,8 +1419,9 @@ check() {
     unset adapter
     for adapter in eth0 eth1 eth2 eth3 eth4 eth5
     do
-        which ip && { ip link set ${adapter} down ; ip link set ${adapter} up; } || { ifconfig ${adapter} down; ifconfig ${adapter} up; }
-        which ip && { ip -s link show "${adapter}" &>/dev/null && echo "${adapter}" >> adapters.eg; } || { ifconfig ${adapter} && echo "${adapter}" >> adapters.eg; }
+        which ip && { ip link set ${adapter} down &>/dev/null; ip link set ${adapter} up &>/dev/null; } || { ifconfig ${adapter} down &>/dev/null; ifconfig ${adapter} up &>/dev/null; }
+        sleep 3s
+        which ip && { ip -s link show "${adapter}" &>/dev/null && echo "${adapter}" >> adapters.eg; } || { ifconfig ${adapter} &>/dev/null && echo "${adapter}" >> adapters.eg; }
     done
     
     [[ -e adapters.eg ]] && adapters_found="$(cat adapters.eg | tr '\n' ' ' | sed 's/ *$//')"
@@ -1827,10 +1828,10 @@ get_tar() {
     
     case ${arch} in
     i686)
-        t_int="${mirror}/releases/x86/autobuilds/${tardate}/${tarball}"; t_dig="${t_int}.DIGESTS"
+        t_int="${mirror}/releases/x86/autobuilds/${tardate}/default/${tardate}/${tarball}"; t_dig="${t_int}.DIGESTS"
     ;;
     amd64)
-        t_int="${mirror}/releases/amd64/autobuilds/${tardate}/${tarball}"; t_dig="${t_int}.DIGESTS"
+        t_int="${mirror}/releases/amd64/autobuilds/${tardate}/default/${tardate}/${tarball}"; t_dig="${t_int}.DIGESTS"
     ;;
     esac
     
