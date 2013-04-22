@@ -210,7 +210,7 @@ connect_me() {
     
     for adapter in ${adapters_found}
     do
-        which ip && { ip link set ${adapter} down ; ip link set ${adapter} up; } || { ifconfig ${adapter} down; ifconfig ${adapter} up; }
+        which ip &>/dev/null && { ip link set ${adapter} down &>/dev/null; ip link set ${adapter} up &>/dev/null; } || { ifconfig ${adapter} down &>/dev/null; ifconfig ${adapter} up &>/dev/null; }
         dlt "/var/run/dhcpcd-${adapter}.pid"
         sleep 3s; dhcpcd ${adapter}; sleep 7s
         [[ "$(ping -nc3 -i2 www.google.com)" ]] && { tch connected.eg; break; }
@@ -1419,9 +1419,9 @@ check() {
     unset adapter
     for adapter in eth0 eth1 eth2 eth3 eth4 eth5
     do
-        which ip && { ip link set ${adapter} down &>/dev/null; ip link set ${adapter} up &>/dev/null; } || { ifconfig ${adapter} down &>/dev/null; ifconfig ${adapter} up &>/dev/null; }
+        which ip &>/dev/null && { ip link set ${adapter} down &>/dev/null; ip link set ${adapter} up &>/dev/null; } || { ifconfig ${adapter} down &>/dev/null; ifconfig ${adapter} up &>/dev/null; }
         sleep 3s
-        which ip && { ip -s link show "${adapter}" &>/dev/null && echo "${adapter}" >> adapters.eg; } || { ifconfig ${adapter} &>/dev/null && echo "${adapter}" >> adapters.eg; }
+        which ip &>/dev/null && { ip -s link show "${adapter}" &>/dev/null && echo "${adapter}" >> adapters.eg; } || { ifconfig ${adapter} &>/dev/null && echo "${adapter}" >> adapters.eg; }
     done
     
     [[ -e adapters.eg ]] && adapters_found="$(cat adapters.eg | tr '\n' ' ' | sed 's/ *$//')"
