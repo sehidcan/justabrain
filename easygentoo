@@ -680,7 +680,7 @@ k_portage() {
     
     eb2 "* "; eg "emerge --sync (this may take a while)"
     inst "sync"
-    inst "--nodeps portage"
+    inst "portage"
 }
 
 k_nm() {
